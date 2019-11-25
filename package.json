@@ -1,0 +1,17 @@
+{
+  "name": "learn_nodejs_q4",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shreyner/learn_nodejs_q4.git"
+  },
+  "author": "Aleksandr Shreyner <al.shreyner@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shreyner/learn_nodejs_q4/issues"
+  },
+  "homepage": "https://github.com/shreyner/learn_nodejs_q4#readme"
+}
