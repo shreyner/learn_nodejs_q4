@@ -4,7 +4,8 @@
   "private": true,
   "description": "",
   "scripts": {
-    "task1": "node ./task_1-1"
+    "task1": "node ./task_1-1",
+    "task1-2": "node ./task_1-2"
   },
   "repository": {
     "type": "git",
