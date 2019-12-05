@@ -2,8 +2,10 @@ import * as fs from "fs"
 import { pipeline } from "stream";
 import csvtojson from "csvtojson";
 
-const sourceFilePath = "./data/node_mentoring_t1_2_input_example.csv";
-const targetFilePath = "./tmp/data.json";
+const logError = (...arg) => console.error(arg);
+
+const sourceFilePath = "./cvs/node_mentoring_t1_2_input_example.csv";
+const targetFilePath = "./data.txt";
 
 const sourceFileStream = fs.createReadStream(sourceFilePath);
 const targetWriteStream = fs.createWriteStream(targetFilePath);
@@ -14,7 +16,7 @@ pipeline(
   targetWriteStream,
   err => {
     if (err) {
-      console.error(err);
+      logError(err);
       return;
     }
 

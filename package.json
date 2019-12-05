@@ -5,7 +5,7 @@
   "description": "",
   "scripts": {
     "task1": "node ./task_1-1",
-    "task1-2": "node ./task_1-2"
+    "task2": "nodemon --exec babel-node -- ./task_1-2/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/shreyner/learn_nodejs_q4/issues"
   },
-  "homepage": "https://github.com/shreyner/learn_nodejs_q4#readme"
+  "homepage": "https://github.com/shreyner/learn_nodejs_q4#readme",
+  "dependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "csvtojson": "^2.0.10",
+    "nodemon": "^2.0.1"
+  }
 }
