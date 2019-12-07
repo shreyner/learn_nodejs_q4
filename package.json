@@ -4,7 +4,7 @@
   "private": true,
   "description": "",
   "scripts": {
-    "task1": "node ./task_1-1",
+    "task1": "babel-node ./task_1-1/index.js",
     "task2": "nodemon --exec babel-node -- ./task_1-2/index.js"
   },
   "repository": {
