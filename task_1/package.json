@@ -1,9 +1,12 @@
 {
-  "name": "learn_nodejs_q4",
+  "name": "task_1",
   "version": "0.0.0",
   "private": true,
   "description": "",
-  "scripts": {},
+  "scripts": {
+    "task1": "../node_modules/.bin/babel-node task_1/task_1-1/index.js",
+    "task2": "../node_modules/.bin/nodemon --exec babel-node -- task_1/task_1-2/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shreyner/learn_nodejs_q4.git"
@@ -14,5 +17,11 @@
     "url": "https://github.com/shreyner/learn_nodejs_q4/issues"
   },
   "homepage": "https://github.com/shreyner/learn_nodejs_q4#readme",
-  "dependencies": {}
+  "dependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "csvtojson": "^2.0.10",
+    "nodemon": "^2.0.1"
+  }
 }
