@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 import createHttpError from 'http-errors';
+import handleValidateErrorMiddleware from './common/validator/middleware';
 import userRouter from './resources/users/routes';
 
 const app = express();
@@ -18,6 +19,8 @@ app.use('/user', userRouter);
 app.use((req, res, next) => {
     next(createHttpError(404));
 });
+
+app.use(handleValidateErrorMiddleware);
 
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     const { message } = err;

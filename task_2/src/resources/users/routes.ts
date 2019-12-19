@@ -1,6 +1,6 @@
 import express from 'express';
 import createHttpError from 'http-errors';
-import { createValidator } from 'express-joi-validation';
+import validator from '../../common/validator';
 import userSchema from './validation/userSchema';
 import paramIdSchema from './validation/params';
 import queryGetUsers from './validation/queryGetUsers';
@@ -8,7 +8,6 @@ import userModel from './model';
 import { User } from './types';
 
 const router = express.Router();
-const validator = createValidator();
 
 const createUser: express.RequestHandler = (req, res, next) => {
     res.json(userModel.create(req.body as Omit<User, 'id' | 'idDeleted'>));
