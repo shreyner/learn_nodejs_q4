@@ -3,6 +3,7 @@ import createHttpError from 'http-errors';
 import { createValidator } from 'express-joi-validation';
 import userSchema from './validation/userSchema';
 import paramIdSchema from './validation/params';
+import queryGetUsers from './validation/queryGetUsers';
 import userModel from './model';
 import { User } from './types';
 
@@ -14,7 +15,11 @@ const createUser: express.RequestHandler = (req, res, next) => {
 };
 
 const getListUsers: express.RequestHandler = (req, res) => {
-    res.json(userModel.getActiveUsers());
+    const { limit, loginSubstring } = req.query;
+
+    return !!loginSubstring
+        ? res.json(userModel.getAutoSuggestUsers(loginSubstring, limit))
+        : res.json(userModel.getActiveUsers());
 };
 
 const getUser: express.RequestHandler<{id: string}> = (req, res, next) => {
@@ -56,7 +61,7 @@ const deleteUser: express.RequestHandler<{id: string}> = (req, res, next) => {
 // Routers
 router.get('/', getListUsers);
 router.post('/', validator.body(userSchema), createUser);
-router.get('/:id', validator.params(paramIdSchema), getUser);
+router.get('/:id', validator.params(paramIdSchema), validator.query(queryGetUsers), getUser);
 router.patch('/:id', validator.params(paramIdSchema), validator.body(userSchema), updateUser);
 router.delete('/:id', validator.params(paramIdSchema), deleteUser);
 

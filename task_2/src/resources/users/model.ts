@@ -1,5 +1,7 @@
 import uuid from 'uuid/v1';
-import pickBy from 'lodash/pickBy';
+import filter from 'lodash/filter';
+import orderBy from 'lodash/orderBy';
+import take from 'lodash/take';
 import { User } from './types';
 
 const usersStore: Record<string, User> = {
@@ -9,11 +11,46 @@ const usersStore: Record<string, User> = {
         password: '123',
         age: 24,
         isDeleted: false
+    },
+    'fae7f7e0-21cd-11ea-99c2-ab261878cd56': {
+        id: 'fae7f7e0-21cd-11ea-99c2-ab261878cd56',
+        login: 'Саша',
+        password: 'sad123sadw1',
+        age: 20,
+        isDeleted: false
+    },
+    'fe45c8e0-21cd-11ea-99c2-ab261878cd56': {
+        id: 'fe45c8e0-21cd-11ea-99c2-ab261878cd56',
+        login: 'Сашашаа',
+        password: 'sad123sadw1',
+        age: 20,
+        isDeleted: false
+    },
+    '01cfda00-21ce-11ea-99c2-ab261878cd56': {
+        id: '01cfda00-21ce-11ea-99c2-ab261878cd56',
+        login: 'Александр',
+        password: 'sad123sadw1',
+        age: 20,
+        isDeleted: false
+    },
+    '059c2440-21ce-11ea-99c2-ab261878cd56': {
+        id: '059c2440-21ce-11ea-99c2-ab261878cd56',
+        login: 'Алек',
+        password: 'sad123sadw1',
+        age: 20,
+        isDeleted: false
+    },
+    '080b9da0-21ce-11ea-99c2-ab261878cd56': {
+        id: '080b9da0-21ce-11ea-99c2-ab261878cd56',
+        login: 'АлекБлы',
+        password: 'sad123sadw1',
+        age: 20,
+        isDeleted: false
     }
 };
 
 
-function create({ login, password, age }: {login: string; password: string; age: number}): User {
+const create = ({ login, password, age }: {login: string; password: string; age: number}): User => {
     const id = uuid();
 
     usersStore[id] = {
@@ -24,9 +61,9 @@ function create({ login, password, age }: {login: string; password: string; age:
         isDeleted: false
     };
     return usersStore[id];
-}
+};
 
-function update(user: {id: string} & Partial<User>): User | undefined {
+const update = (user: {id: string} & Partial<User>): User | undefined => {
     if (!usersStore[user.id]) return;
 
     usersStore[user.id] = {
@@ -35,17 +72,13 @@ function update(user: {id: string} & Partial<User>): User | undefined {
     };
 
     return usersStore[user.id];
-}
+};
 
-function findById(id: string): User | undefined {
-    return usersStore[id];
-}
+const findById = (id: string): User | undefined => usersStore[id];
 
-function findAll(): typeof usersStore {
-    return usersStore;
-}
+const findAll = (): typeof usersStore => usersStore;
 
-function deleteUser(id: string): boolean {
+const deleteUser = (id: string): boolean => {
     const user = usersStore[id];
 
     if (!user || user.isDeleted) return false;
@@ -53,11 +86,14 @@ function deleteUser(id: string): boolean {
     usersStore[id].isDeleted = true;
 
     return true;
-}
+};
 
-function getActiveUsers(): typeof usersStore {
-    return pickBy(findAll(), ({ isDeleted }) => !isDeleted);
-}
+const getActiveUsers = (): ReadonlyArray<User> => filter(findAll(), ({ isDeleted }) => !isDeleted);
+
+const getAutoSuggestUsers = (loginSubstring?: string, limit = 5) => take(orderBy(
+    filter(usersStore, ({ login }) => new RegExp(`^${loginSubstring}.+`, 'g').test(login)),
+    ['login']
+), limit);
 
 export default {
     create,
@@ -65,5 +101,6 @@ export default {
     update,
     findAll,
     deleteUser,
-    getActiveUsers
+    getActiveUsers,
+    getAutoSuggestUsers
 };
