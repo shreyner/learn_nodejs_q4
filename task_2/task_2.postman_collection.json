@@ -22,6 +22,13 @@
 							"path": [
 								"user",
 								""
+							],
+							"query": [
+								{
+									"key": "loginSubstring",
+									"value": "Саша",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -41,7 +48,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"login\": \"alex2\",\n\t\"password\": \"1234\",\n\t\"age\": 20\n}",
+							"raw": "{\n\t\"login\": \"АлекБлы\",\n\t\"password\": \"12asdas3\",\n\t\"age\": 20\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -94,7 +101,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"login\": \"alex2\",\n\t\"age\": 20\n}"
+							"raw": "{\n\t\"login\": \"alex2\",\n\t\"password\": \"123sad2f4\",\n\t\"age\": 20\n}"
 						},
 						"url": {
 							"raw": "localhost:3000/user/1bd11de0-20f4-11ea-b8c6-7591b2898f10",
